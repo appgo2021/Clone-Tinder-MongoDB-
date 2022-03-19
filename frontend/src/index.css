@@ -3,7 +3,7 @@
 html,body {
     margin: 0;
     padding: 0;
-    align-items: center;
+    text-align: center;
 }
 
 * {
@@ -57,7 +57,7 @@ nav {
     justify-content: space-between;
 }
 
-nav .nav-button{
+nav .nav-button {
     color: rgb(254, 48, 114);
     background-color: rgb(255, 255, 255);
     font-size: 20px;
@@ -65,6 +65,11 @@ nav .nav-button{
     border-radius: 10px;
     border: none;
     margin: 10px;
+}
+
+nav .nav-button:disabled {
+    background-color: rgb(189, 180, 180);
+    color: rgb(160, 38, 75);
 }
 
 nav .logo-container {
@@ -188,11 +193,11 @@ nav .logo-container .logo {
     border: solid 2px rgb(221, 39, 22);
 }
 
-.onboarding form .multiple-input-container input [type="submit"]:hover {
+.onboarding form input [type="submit"]:hover {
     background-color: rgb(235, 235, 235);
 }
 
-.onboarding form .multiple-input-container input [type="submit"]:active {
+.onboarding form input [type="submit"]:active {
     background-color: rgb(226, 115, 155);
 }
 
@@ -219,14 +224,16 @@ nav .logo-container .logo {
     position: absolute;
 }
 
-.dashboard .cardContainer {
+.dashboard .card-container {
     width: 400px;
     height: 650px;
 }
 
 .card {
+    background-color: #fff;
     width: 400px;
     height: 650px;
+    box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     background-size: cover;
     background-position: center;

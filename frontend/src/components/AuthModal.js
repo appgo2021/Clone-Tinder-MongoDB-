@@ -8,7 +8,7 @@ const AuthModal = ({setShowModal, isSignUp})=> {
   const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
   const [error, setError] = useState(null)
-  const [setCookie] = useCookies(['user'])
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
   let navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const AuthModal = ({setShowModal, isSignUp})=> {
     setShowModal(false)
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     try{
       if( isSignUp && ( password !== confirmPassword )){

@@ -14,7 +14,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
 
     try{
       const response = await axios.get('http://localhost:8000/messages', {
-        params: { useId: userId, correspondingUserId: clickedUserId}
+        params: { userId: userId, correspondingUserId: clickedUserId }
       })
       setUsersMessages(response.data)
     }catch(error){
@@ -26,7 +26,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
 
     try{
       const response = await axios.get('http://localhost:8000/messages', {
-        params: { useId: clickedUserId, correspondingUserId: userId}
+        params: { userId: clickedUserId, correspondingUserId: userId }
       })
       setClickedUsersMessages(response.data)
     }catch(error){
@@ -35,8 +35,8 @@ const ChatDisplay = ({ user, clickedUser }) => {
   }
   
   useEffect(() => {
-    getUsersMessages(userId, clickedUserId)
-    getClickedUsersMessages(clickedUser, userId)
+    getUsersMessages()
+    getClickedUsersMessages()
   },[])
 
   const messages = []
@@ -44,8 +44,8 @@ const ChatDisplay = ({ user, clickedUser }) => {
   usersMessages?.forEach(message => {
     const formattedMessage = {}
 
-    formattedMessage['name'] = clickedUser?.first_name
-    formattedMessage['img'] = clickedUser?.url
+    formattedMessage['name'] = user?.first_name
+    formattedMessage['img'] = user?.url
     formattedMessage['message'] = message.message
     formattedMessage['timestamp'] = message.timestamp
 
@@ -55,8 +55,8 @@ const ChatDisplay = ({ user, clickedUser }) => {
   clickedUsersMessages?.forEach(message => {
     const formattedMessage = {}
 
-    formattedMessage['name'] = user?.first_name
-    formattedMessage['img'] = user?.url
+    formattedMessage['name'] = clickedUser?.first_name
+    formattedMessage['img'] = clickedUser?.url
     formattedMessage['message'] = message.message
     formattedMessage['timestamp'] = message.timestamp
 

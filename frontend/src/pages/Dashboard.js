@@ -7,7 +7,7 @@ import ChatContainer from '../components/ChatContainer'
 const Dashboard = () => { 
   const [user, setUser] = useState(null)
   const [genderedUsers, setGenderedUsers] = useState(null)
-  const [cookies] = useCookies(['user'])
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [lastDirection, setLastDirection] = useState()
 
   const userId = cookies.UserId
@@ -56,8 +56,6 @@ const Dashboard = () => {
     }
   }
 
-  console.log(user)
-
   const swiped = (direction, swipedUserId) => {
     if(direction === 'right'){
       updateMatches(swipedUserId)
@@ -81,6 +79,7 @@ const Dashboard = () => {
       <ChatContainer user={user}/>
       <div className="swipe-container">
         <div className="card-container">
+          
           {filteredGenderedUsers?.map((genderedUser) => 
             <TinderCard 
             className='swipe' 

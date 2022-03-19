@@ -80,20 +80,6 @@ app.post('/login', async (req, res) => {
     }
 })
 
-// app.get('/users', async(req, res) => {
-//     const client = new MongoClient(uri)
-//     try{
-//         await client.connect()
-//         const database = client.db('app-data')
-//         const users = database.collection('users')
-
-//         const returnedUsers = await users.find().toArray()
-//         res.send(returnedUsers)
-//     }finally {
-//         await client.close()
-//     }
-// })
-
 app.get('/user', async(req, res) => {
     const client = new MongoClient(uri)
     const userId = req.query.userId
@@ -106,6 +92,21 @@ app.get('/user', async(req, res) => {
         const query = { user_id: userId }
         const user = await users.findOne(query)
         res.send(user)
+    }finally{
+        await client.close()
+    }
+})
+
+app.get('/users', async (req, res) => {
+    const client = new MongoClient(uri)
+
+    try{
+        await client.connect()
+        const database = client.db('app-data')
+        const users = database.collection('users')
+
+        const returnedUsers = await users.find().toArray()
+        res.send(returnedUsers)
     }finally{
         await client.close()
     }
@@ -177,7 +178,7 @@ app.put('/user', async(req, res) => {
                 about: formData.about,
                 url: formData.url,
                 matches: formData.matches
-            }
+            },
         }
         const insertedUser = await users.updateOne(query, updateDocument)
         res.send(insertedUser)
@@ -206,7 +207,7 @@ app.put('/addmatch', async (req, res) => {
     }
 })
 
-app.get('/messages', async() => {
+app.get('/messages', async () => {
     const client = new MongoClient(uri)
     const { userId, correspondingUserId } = req.query
     
